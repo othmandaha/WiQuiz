@@ -2,7 +2,7 @@
 
 ![Game Logo](LOGO.jpeg)
 
-This is a simple console-based trivia game where players can test their knowledge on various subjects. The game presents multiple-choice questions with one of the options being a lie, and players must identify the lie to earn points.
+This is a simple under-devolopment trivia game where players can test their knowledge on various subjects. The game presents multiple-choice questions with one of the options being a lie, and players must identify the lie to earn points.
 
 ## 🎯 How to Play
 
