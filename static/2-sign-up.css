@@ -1,0 +1,144 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevent scrolling */
+    position: relative; /* Create a stacking context for the pseudo-element */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/static/images/wl5.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(10px); /* Apply blur to the background image */
+    z-index: -1; /* Place behind the content */
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    background-color: rgba(246, 246, 246, 0.9); /* Slightly transparent background */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto; /* Center the container */
+    position: relative; /* Position relative to stack over the pseudo-element */
+    z-index: 1; /* Ensure the container is above the blurred background */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.left-panel {
+    /* background-color: #C7FFD8; */
+    background: url('/static/images/wl1.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 2rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
+.welcome-message {
+    text-align: left;
+}
+
+.welcome-message h1 {
+    font-size: 48px;
+    color: #161D6F;
+    margin-bottom: 1rem;
+}
+
+.welcome-message p {
+    font-size: 18px;
+    color: #161D6F;
+}
+
+.right-panel {
+    width: 50%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #F6F6F6;
+}
+
+.signin-link {
+    align-self: flex-end;
+    margin-bottom: 2rem;
+}
+
+.signin-link p {
+    font-size: 14px;
+    color: #161D6F;
+}
+
+.signin-link a {
+    color: #161D6F;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signin-link a:hover {
+    text-decoration: underline;
+}
+
+.signup-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form input {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-size: 16px;
+    border: 2px solid #98DED9;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    color: #161D6F;
+    transition: border-color 0.3s ease;
+}
+
+.signup-form input:focus {
+    border-color: #161D6F;
+    outline: none;
+}
+
+.signup-form button {
+    padding: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #161D6F;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-form button:hover {
+    background-color: #98DED9;
+}
