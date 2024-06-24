@@ -1,0 +1,27 @@
+{% extends "auth_base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="left-panel">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/Extended logo.png') }}" alt="Logo">
+        </div>
+        <div class="welcome-message">
+            <h1>Welcome</h1>
+            <p>Sign up to continue access</p>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="signin-link">
+            <p>Already have an account? <a href="{{ url_for('routes.signin') }}">Sign in</a></p>
+        </div>
+        <form class="signup-form" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

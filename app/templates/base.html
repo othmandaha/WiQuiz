@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='1-landing.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <div class="logo-nav">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/Extended logo.png') }}" alt="Logo">
+            </div>
+            <div class="nav-links">
+                <a href="#about-us">About Us</a>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('routes.logout') }}">
+                    <button class="log-in">Logout</button>
+                </a>
+            {% else %}
+                <a href="{{ url_for('routes.signup') }}">
+                    <button class="sign-up">Sign Up</button>
+                </a>
+                <a href="{{ url_for('routes.signin') }}">
+                    <button class="log-in">Log In</button>
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
