@@ -21,15 +21,23 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
-        if password == confirm_password:
-            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-            user = User(username=username, email=email, password=hashed_password)
-            db.session.add(user)
-            db.session.commit()
-            flash('Your account has been created! You are now able to log in', 'success')
-            return redirect(url_for('routes.signin'))
-        else:
-            flash('Passwords do not match', 'danger')
+
+        if password != confirm_password:
+            flash('Passwords do not match.', 'error')
+            return redirect(url_for('routes.signup'))
+        
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash('Email is already used.', 'error')
+            return redirect(url_for('routes.signup'))
+
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        user = User(username=username, email=email, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('routes.signin'))
+
     return render_template('signup.html')
 
 @bp.route("/signin", methods=['GET', 'POST'])
@@ -42,9 +50,10 @@ def signin():
         user = User.query.filter_by(email=email).first()
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user, remember=True)
+            flash('Logged in successfully.', 'success')
             return redirect(url_for('routes.landing'))
         else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+            flash('Login Unsuccessful. Please check email and password', 'error')
     return render_template('signin.html')
 
 @bp.route("/logout")
