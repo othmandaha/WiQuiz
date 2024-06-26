@@ -1,0 +1,49 @@
+{% extends "auth_base.html" %}
+{% block title %}Create Quiz{% endblock %}
+{% block content %}
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="/">
+          <img src="{{ url_for('static', filename='images/Extended logo.png') }}" alt="Logo" class="logo">
+        </a>
+        <a href="/" class="home-link">Home</a>
+    </div>
+    <div class="nav-right">
+        <button onclick="window.location.href='/logout'">Logout</button>
+    </div>
+</nav>
+<div class="container">
+    <h2>Create a New Quiz</h2>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Quiz Title" id="quiz-title" required>
+        <div id="question-answers">
+            {% for i in range(4) %}
+            <div class="question-answer">
+                <input type="text" name="terms[]" placeholder="Term" required>
+                <input type="text" name="definitions[]" placeholder="Definition" required>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="button" id="add-question">+</button>
+        <button type="submit">Save Quiz</button>
+    </form>
+</div>
+<script>
+document.getElementById('add-question').addEventListener('click', function() {
+    var container = document.getElementById('question-answers');
+    var qaDiv = document.createElement('div');
+    qaDiv.className = 'question-answer';
+    qaDiv.innerHTML = '<input type="text" name="terms[]" placeholder="Term" required> <input type="text" name="definitions[]" placeholder="Definition" required> <button type="button" class="remove-question">-</button>';
+    container.appendChild(qaDiv);
+
+    var removeButtons = document.querySelectorAll('.remove-question');
+    removeButtons.forEach(function(button) {
+        button.onclick = function() {
+            var parentDiv = this.parentElement;
+            container.removeChild(parentDiv);
+        };
+    });
+});
+</script>
+{% endblock %}
+

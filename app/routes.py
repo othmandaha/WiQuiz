@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template, url_for, flash, redirect, request
 from app import db, bcrypt
-from app.models import User
+from app.models import User, Question, Quiz
 from flask_login import login_user, current_user, logout_user, login_required
 
 bp = Blueprint('routes', __name__)
@@ -60,3 +60,20 @@ def signin():
 def logout():
     logout_user()
     return redirect(url_for('routes.landing'))
+
+@bp.route("/create_quiz", methods=['GET', 'POST'])
+@login_required
+def create_quiz():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        terms = request.form.getlist('terms[]')
+        definitions = request.form.getlist('definitions[]')
+        quiz = Quiz(title=title, user_id=current_user.id)
+        db.session.add(quiz)
+        for term, definition in zip(terms, definitions):
+            question = Question(term=term, definition=definition, quiz=quiz)
+            db.session.add(question)
+        db.session.commit()
+        flash('Quiz created successfully!', 'success')
+        return redirect(url_for('routes.landing'))
+    return render_template('create_quiz.html')

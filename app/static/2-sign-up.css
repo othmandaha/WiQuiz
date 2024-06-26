@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden; /* Prevent scrolling */
+    /* overflow: hidden; Prevent scrolling */
     position: relative; /* Create a stacking context for the pseudo-element */
 }
 

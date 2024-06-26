@@ -18,3 +18,15 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+class Quiz(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    questions = db.relationship('Question', backref='quiz', lazy=True)
+
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    term = db.Column(db.String(100), nullable=False)
+    definition = db.Column(db.String(100), nullable=False)
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)

@@ -145,3 +145,9 @@ main {
     max-width: 600px;
     margin: 0 auto;
 }
+
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
