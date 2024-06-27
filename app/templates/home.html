@@ -1,0 +1,31 @@
+{% extends "auth_base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/Extended logo.png') }}" alt="Logo" class="logo">
+        </a>
+        <a href="/create_quiz" class="home-link">create Quiz</a>
+    </div>
+    <div class="nav-right">
+        <button onclick="window.location.href='/logout'">Logout</button>
+    </div>
+</nav>
+<div class="container">
+    {% if quizzes %}
+        <div class="quizzes">
+            {% for quiz in quizzes %}
+                <div class="quiz-card">
+                    <h3>{{ quiz.title }}</h3>
+                    <p>{{ quiz.questions|length }} questions</p>
+                    <button onclick="window.location.href='/take_quiz/{{ quiz.id }}'">Take Quiz</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>Create your quiz</h2>
+        <button onclick="window.location.href='/create_quiz'" class="big-plus">+</button>
+    {% endif %}
+</div>
+{% endblock %}

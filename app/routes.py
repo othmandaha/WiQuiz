@@ -7,15 +7,24 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 bp = Blueprint('routes', __name__)
 
+
 @bp.route("/")
 @bp.route("/landing")
 def landing():
+    if current_user.is_authenticated:
+        return redirect(url_for('routes.home'))
     return render_template('landing.html')
+
+@bp.route("/home")
+@login_required
+def home():
+    quizzes = Quiz.query.filter_by(user_id=current_user.id).all()
+    return render_template('home.html', quizzes=quizzes)
 
 @bp.route("/signup", methods=['GET', 'POST'])
 def signup():
     if current_user.is_authenticated:
-        return redirect(url_for('routes.landing'))
+        return redirect(url_for('routes.home'))
     if request.method == 'POST':
         username = request.form.get('username')
         email = request.form.get('email')
@@ -43,7 +52,7 @@ def signup():
 @bp.route("/signin", methods=['GET', 'POST'])
 def signin():
     if current_user.is_authenticated:
-        return redirect(url_for('routes.landing'))
+        return redirect(url_for('routes.home'))
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -51,7 +60,7 @@ def signin():
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user, remember=True)
             flash('Logged in successfully.', 'success')
-            return redirect(url_for('routes.landing'))
+            return redirect(url_for('routes.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'error')
     return render_template('signin.html')
