@@ -7,7 +7,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 bp = Blueprint('routes', __name__)
 
-
 @bp.route("/")
 @bp.route("/landing")
 def landing():
@@ -84,5 +83,21 @@ def create_quiz():
             db.session.add(question)
         db.session.commit()
         flash('Quiz created successfully!', 'success')
-        return redirect(url_for('routes.landing'))
+        return redirect(url_for('routes.home'))
     return render_template('create_quiz.html')
+
+@bp.route("/delete_quiz/<int:quiz_id>", methods=['POST'])
+@login_required
+def delete_quiz(quiz_id):
+    quiz_to_delete = Quiz.query.get_or_404(quiz_id)
+    if quiz_to_delete.user_id != current_user.id:
+        flash('You do not have permission to delete this quiz.', 'error')
+        return redirect(url_for('routes.home'))
+    
+    # Delete related Question records first
+    Question.query.filter_by(quiz_id=quiz_id).delete()
+    
+    db.session.delete(quiz_to_delete)
+    db.session.commit()
+    flash('Quiz deleted successfully!', 'success')
+    return redirect(url_for('routes.home'))
