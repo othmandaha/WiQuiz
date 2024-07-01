@@ -101,3 +101,19 @@ def delete_quiz(quiz_id):
     db.session.commit()
     flash('Quiz deleted successfully!', 'success')
     return redirect(url_for('routes.home'))
+
+@bp.route("/take_quiz/<int:quiz_id>")
+@login_required
+def take_quiz(quiz_id):
+    quiz = Quiz.query.get_or_404(quiz_id)
+    questions = quiz.questions
+    
+    serialized_questions = [
+        {
+            'id': question.id,
+            'term': question.term,
+            'definition': question.definition
+        } for question in questions
+    ]
+    
+    return render_template('take_quiz.html', quiz=quiz, questions=serialized_questions)
