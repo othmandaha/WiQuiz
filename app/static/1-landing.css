@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,6 +8,7 @@ body {
     scroll-behavior: smooth;
 }
 
+/* Navigation Styles */
 nav {
     background-color: #F6F6F6;
     color: #161D6F;
@@ -127,6 +129,48 @@ main {
     height: auto; 
 }
 
+/* Features Section */
+.features-section {
+    padding: 4rem 2rem;
+    background-color: #f6f6f6;
+}
+
+.feature-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.feature-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.feature-text {
+    width: 50%;
+    padding: 1rem;
+}
+
+.feature-text h2 {
+    font-size: 28px;
+    margin-bottom: 1rem;
+}
+
+.feature-text p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.feature-image {
+    width: 40%;
+    padding: 1rem;
+}
+
+.feature-image img {
+    width: 100%;
+    height: auto;
+}
+
 /* About Us Section */
 .about-us-section {
     background-color: white;
@@ -146,8 +190,40 @@ main {
     margin: 0 auto;
 }
 
-
-.message.success {
-    background-color: #d4edda;
-    color: #155724;
+.about-us-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 1rem 0;
 }
+
+.about-us-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.about-us-section ul li a {
+    color: #161D6F;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.about-us-section ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Flash Messages */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color:

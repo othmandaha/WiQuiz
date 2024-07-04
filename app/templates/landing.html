@@ -16,9 +16,51 @@
         </div>
     </div>
 </main>
+
+<!-- Features Section -->
+<section id="features" class="features-section">
+    <div class="feature-item">
+        <div class="feature-text">
+            <h2>Create Account</h2>
+            <p>Create your account to efficiently manage and customize your quizzes, keeping track of all your learning activities in one place.</p>
+        </div>
+        <div class="feature-image">
+            <img src="{{ url_for('static', filename='images/account.png') }}" alt="Create Account Screenshot">
+        </div>
+    </div>
+    <div class="feature-item reverse">
+        <div class="feature-image">
+            <img src="{{ url_for('static', filename='images/create.png') }}" alt="Create Quiz Screenshot">
+        </div>
+        <div class="feature-text">
+            <h2>Create Quiz</h2>
+            <p>Craft your personalized quizzes by adding a unique title and specifying the questions or terms alongside their respective answers or definitions, providing a tailored testing experience.</p>
+        </div>
+    </div>
+    <div class="feature-item">
+        <div class="feature-text">
+            <h2>Take Your Quiz</h2>
+            <p>Engage with the quizzes by answering the presented questions or terms, each accompanied by four options, of which only one is correct. Track your performance and improve your knowledge effectively.</p>
+        </div>
+        <div class="feature-image">
+            <img src="{{ url_for('static', filename='images/take.png') }}" alt="Take Quiz Screenshot">
+        </div>
+    </div>
+</section>
+
 <!-- About Us Section -->
 <section id="about-us" class="about-us-section">
     <h2>About Us</h2>
-    <p>We are a team dedicated to making learning an engaging and interactive experience. Our mission is to provide users with tools that make studying enjoyable and effective. Join us on this journey to revolutionize education, one quiz at a time.</p>
+    <p>We are a one man team dedicated to making learning an engaging and interactive experience. Our mission is to provide users with tools that make studying enjoyable and effective. Join us on this journey to revolutionize education, one quiz at a time.</p>
+    <h2>About the Project</h2>
+    <p>This project was inspired by my own experiences with studying and the challenges of retaining information through traditional methods. I wanted to create a tool that not only helps in learning but also makes it fun and engaging. This project is also a part of my portfolio for Holberton School. It has been a rewarding journey of learning and development.</p>
+    <h3>Connect with Me</h3>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/othman-daha-82727a275/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/othmandaha" target="_blank">GitHub</a></li>
+        <li><a href="https://twitter.com/" target="_blank">Twitter</a></li>
+    </ul>
+    <h3>Project Repository</h3>
+    <p>You can view the code for this project on my <a href="https://github.com/othmandaha/WiQuiz.git" target="_blank">GitHub repository</a>.</p>
 </section>
 {% endblock %}
